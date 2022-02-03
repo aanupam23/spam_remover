@@ -1,7 +1,6 @@
 # spam_remover
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Document](https://img.shields.io/badge/godoc-document-blue.svg)](https://godoc.org/github.com/aanupam23/spam_remover)
-
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) 
 
 ## About
 Removes short and spammy messages on discord server, and removes the moderation message after a fixed duration. (30 seconds by default)
