@@ -3,12 +3,13 @@ package handler
 import (
 	"time"
 
+	"github.com/aanupam23/spam_remover/internal/config"
 	"github.com/bwmarrin/discordgo"
 )
 
 var (
-	modMessage = `Your message will self-destroy in 30 seconds, contact a Prefect or read the Community Rules in <#809043464964014100> to know why.
-I'm a bot, bleep, bloop. 🤖`
+	modMessage = `Your post will be removed!`
+	C          *config.MainConfig
 )
 
 // SpamHandler checks for all message that are spam and takes action! PS: It is strict!
@@ -23,12 +24,15 @@ func SpamHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// If the message is a spam, then we start working on it!"
 	if m.Content == "Hello" || m.Content == "Hello)" || m.Content == "Hi" || m.Content == "Hi)" || m.Content == "Hey" || m.Content == "Hey)" {
 		go DelayedMessageRemover(s, m.ChannelID, m.ID)
+		if config.C.ModMessage != "" {
+			modMessage = config.C.ModMessage
+		}
 		bm, _ := s.ChannelMessageSendReply(m.ChannelID, modMessage, m.Reference())
 		go DelayedMessageRemover(s, bm.ChannelID, bm.ID)
 	}
 }
 
 func DelayedMessageRemover(s *discordgo.Session, channelID string, messageID string) {
-	time.Sleep(10 * time.Second)
+	time.Sleep(time.Duration(config.C.Duration) * time.Second)
 	_ = s.ChannelMessageDelete(channelID, messageID)
 }

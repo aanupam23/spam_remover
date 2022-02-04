@@ -1,0 +1,13 @@
+# Configuration for spam_remover
+
+# Set seconds after which bot will remove message
+duration = "30" 
+
+# Set Moderation message that bot will post
+modmessage = """
+Your message will self-destroy in 30 seconds, contact a Prefect or read the Community Rules in <#CHANNEL_ID> to know why.
+I'm a bot, bleep, bloop. 🤖
+"""
+
+# Not Implemented right now
+spamlist = "list"

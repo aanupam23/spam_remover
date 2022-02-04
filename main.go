@@ -7,6 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/aanupam23/spam_remover/internal/config"
 	"github.com/aanupam23/spam_remover/internal/handler"
 	"github.com/bwmarrin/discordgo"
 )
@@ -22,6 +23,14 @@ func init() {
 }
 
 func main() {
+
+	// Get configuration from config and env
+	conf := config.ReadConfig()
+	fmt.Printf("Spam Removal Duration is %d seconds\n", conf.Duration)
+
+	if conf.BOT_TOKEN != "" {
+		Token = conf.BOT_TOKEN
+	}
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + Token)
