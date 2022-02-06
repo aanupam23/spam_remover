@@ -23,6 +23,41 @@ func SpamHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	// If the message is a spam, then we start working on it!"
 	if m.Content == "Hello" || m.Content == "Hello)" || m.Content == "Hi" || m.Content == "Hi)" || m.Content == "Hey" || m.Content == "Hey)" {
+
+		// If IgnoreGroup is specified
+		if config.C.IgnoreGroup != "" {
+			// First check if member is in IgnoreGroup
+			allRolesID := m.Member.Roles
+			for _, roleID := range allRolesID {
+				rolesStruct, err := s.State.Role(m.GuildID, roleID)
+				if err != nil {
+					panic(err)
+				}
+				if rolesStruct.Name == config.C.IgnoreGroup {
+					return
+				}
+			}
+		}
+
+		// If IgnoreDuration is specified
+		if config.C.IgnoreDuration > 0 {
+			// Now Check if User is in Ignore Duration
+			joinedAt := m.Member.JoinedAt
+			messageTime := m.Timestamp
+
+			// Time Duration for which user has been part of community
+			spendDuration := messageTime.Sub(joinedAt)
+
+			// Converting the Member Group Duration in Weeks
+			spendDurationinWeek := spendDuration.Hours() / 24 / 7
+
+			// If user has spent more time then required duration then message is okay to be posted
+			if spendDurationinWeek > config.C.IgnoreDuration {
+				return
+			}
+		}
+
+		// Now only spammers are present and we need to take action!
 		go DelayedMessageRemover(s, m.ChannelID, m.ID)
 		if config.C.ModMessage != "" {
 			modMessage = config.C.ModMessage

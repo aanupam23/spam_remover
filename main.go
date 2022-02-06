@@ -42,8 +42,8 @@ func main() {
 	// Let's add the SpamHandler with the above created discord Server
 	dg.AddHandler(handler.SpamHandler)
 
-	// In this example, we only care about receiving message events.
-	dg.Identify.Intents = discordgo.IntentsGuildMessages
+	// In this case, we only care about receiving message events.
+	dg.Identify.Intents = discordgo.IntentsGuilds | discordgo.IntentsGuildMessages
 
 	// Open a websocket connection to Discord and begin listening.
 	err = dg.Open()

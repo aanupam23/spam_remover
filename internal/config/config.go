@@ -8,9 +8,11 @@ import (
 
 // MainConfig is overall configuration structure
 type MainConfig struct {
-	Duration   int    `mapstructure:"duration"`
-	ModMessage string `mapstructure:"modmessage"`
-	BOT_TOKEN  string
+	Duration       int     `mapstructure:"duration"`
+	ModMessage     string  `mapstructure:"modmessage"`
+	IgnoreDuration float64 `mapstructure:"ignoreduration"`
+	IgnoreGroup    string  `mapstructure:"ignoregroup"`
+	BOT_TOKEN      string
 }
 
 // C is the mainconfig object

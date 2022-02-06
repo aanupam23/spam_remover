@@ -9,5 +9,11 @@ Your message will self-destroy in 30 seconds, contact a Prefect or read the Comm
 I'm a bot, bleep, bloop. 🤖
 """
 
+# Set minimum duration in weeks for users post to be allowed (Leave 0 to disable)
+ignoreduration = "2" 
+
+# Set Ignore group of users for Moderation (Leave blank to disable)
+ignoregroup = "Layer 2" 
+
 # Not Implemented right now
 spamlist = "list"
