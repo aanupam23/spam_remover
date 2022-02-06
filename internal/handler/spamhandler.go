@@ -24,7 +24,7 @@ func SpamHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// If the message is a spam, then we start working on it!"
 	if m.Content == "Hello" || m.Content == "Hello)" || m.Content == "Hi" || m.Content == "Hi)" || m.Content == "Hey" || m.Content == "Hey)" {
 
-		// If IgnoreGroup is specified
+		// If IgnoreGroup is specified, then check if user is part of ignored group
 		if config.C.IgnoreGroup != "" {
 			// First check if member is in IgnoreGroup
 			allRolesID := m.Member.Roles
@@ -39,7 +39,7 @@ func SpamHandler(s *discordgo.Session, m *discordgo.MessageCreate) {
 			}
 		}
 
-		// If IgnoreDuration is specified
+		// If IgnoreDuration is specified, then check users time duration in group
 		if config.C.IgnoreDuration > 0 {
 			// Now Check if User is in Ignore Duration
 			joinedAt := m.Member.JoinedAt
