@@ -8,8 +8,9 @@ Removes short and spammy messages on discord server and posts a moderation messa
 
 spam_remover works like this -
 1) Suppose a spammer creates spammy message
-2) spam_remover replies to the message "Your post will be deleted!" 
-3) After 30 seconds, this bot deletes the spam message and it's Warning message.
+2) Checks if user is really a spammer (Based on duration and user group)
+3) spam_remover replies to the message "Your post will be deleted!" 
+4) After 30 seconds, this bot deletes the spam message and it's Warning message.
 
 Keeps your channel is now clean!
 
