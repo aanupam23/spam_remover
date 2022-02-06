@@ -58,7 +58,7 @@ func main() {
 	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
 	<-sc
 
-	fmt.Println("Goodbye!")
+	fmt.Println("Goodbye, Take care!")
 
 	// Cleanly close down the Discord session.
 	dg.Close()
